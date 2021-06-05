@@ -65,7 +65,7 @@ class Footer extends Component {
                   return (
                     <li key={member.id}>
                       <button>
-                        <a href={member.blog} target="_blank">
+                        <a href={member.blog} target="_blank" rel="noreferrer">
                           <span>{member.name}</span>
                         </a>
                       </button>
