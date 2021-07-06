@@ -23,7 +23,7 @@ class MainSectionMovieList extends React.Component {
         onClick={this.goToDetailPage}
         style={{
           transform: `translateX(-${width}px)`,
-          transition: 'transform .8s ', //영화 각 리스트에 translateX 스타일 지정
+          transition: 'transform .8s ',
         }}
         className="mainSectionMovieList"
       >

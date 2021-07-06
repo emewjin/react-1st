@@ -67,7 +67,7 @@ class Main extends React.Component {
   };
 
   componentDidMount() {
-    this.getMockData();
+    // this.getMockData();
     //서버 연결시 확인
     // this.getMovieListData(API_URLS['MAIN_BOX_OFFICE'])
     //   .then(() => this.getMovieListData(API_URLS['MAIN_NETFLIX']))

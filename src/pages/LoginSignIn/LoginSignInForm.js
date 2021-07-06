@@ -30,9 +30,8 @@ class LoginSignInForm extends Component {
         if (res.status === 200) {
           return res.json();
         }
-        if (res.status === 400) {
-          alert('아이디는 nini@gmail.com 비밀번호는 12345678a@입니다');
-        }
+        alert('아이디와 비밀번호를 확인해주세요');
+        throw new Error('fail to login');
       })
       .then(res => {
         if (res) {
@@ -59,19 +58,13 @@ class LoginSignInForm extends Component {
         if (res.status === 200) {
           return res.json();
         }
+        alert('입력된 정보를 확인해주세요');
+        throw new Error('fail to sign in');
       })
-      .then(
-        res => {
-          this.props.closeModal();
-          alert('회원가입 성공');
-        }
-        //   {
-        //   if (res) {
-        //     localStorage.setItem('TOKEN', res.token);
-        //     this.props.checkUserLogined();
-        //   }
-        // }
-      )
+      .then(() => {
+        this.props.closeModal();
+        alert('회원가입 성공');
+      })
       .catch(error => {
         alert(error);
       });
