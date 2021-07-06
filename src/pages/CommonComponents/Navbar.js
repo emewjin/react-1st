@@ -11,7 +11,7 @@ class Navbar extends Component {
     super(props);
     this.state = {
       isUserLogined: !!localStorage.getItem('TOKEN'),
-      isSignBtnClicked: false,
+      formType: '',
       modalOpened: false,
     };
   }
@@ -33,14 +33,14 @@ class Navbar extends Component {
   clickSignIn = () => {
     this.setState({
       modalOpened: true,
-      isSignBtnClicked: true,
+      formType: 'signin',
     });
   };
 
   clickLogin = () => {
     this.setState({
       modalOpened: true,
-      isSignBtnClicked: false,
+      formType: 'login',
     });
   };
 
@@ -55,18 +55,18 @@ class Navbar extends Component {
 
   goToLoginModal = () => {
     this.setState({
-      isSignBtnClicked: false,
+      formType: 'login',
     });
   };
 
   goToSignInModal = () => {
     this.setState({
-      isSignBtnClicked: true,
+      formType: 'signin',
     });
   };
 
   render() {
-    const { isUserLogined, isSignBtnClicked, modalOpened } = this.state;
+    const { isUserLogined, modalOpened, formType } = this.state;
     const {
       closeModal,
       clickSignIn,
@@ -110,8 +110,8 @@ class Navbar extends Component {
             childComponent={
               <LoginSignInForm
                 closeModal={closeModal}
+                formType={formType}
                 checkUserLogined={checkUserLogined}
-                isSignBtnClicked={isSignBtnClicked}
                 goToLoginModal={goToLoginModal}
                 goToSignInModal={goToSignInModal}
               />

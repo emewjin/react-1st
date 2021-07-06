@@ -131,8 +131,7 @@ class LoginSignInForm extends Component {
 
   render() {
     const { id, pw, name, isOnceBlured } = this.state;
-    //default : LoginBtn 클릭했을 때 (false)
-    const { isSignBtnClicked, goToLoginModal, goToSignInModal } = this.props;
+    const { goToLoginModal, goToSignInModal, formType } = this.props;
     const {
       handleInput,
       requestLogin,
@@ -151,13 +150,11 @@ class LoginSignInForm extends Component {
 
     return (
       <ModalLogoLayout>
-        {isSignBtnClicked ? (
-          <h2 className="formHeader">회원가입</h2>
-        ) : (
-          <h2 className="formHeader">로그인</h2>
-        )}
+        <h2 className="formHeader">
+          {formType === 'login' ? '로그인' : '회원가입'}
+        </h2>
         <form className="form">
-          {isSignBtnClicked && (
+          {formType === 'signin' && (
             <div
               className={`inputDiv ${
                 isNameValid === false && 'warningInputDiv'
@@ -248,7 +245,7 @@ class LoginSignInForm extends Component {
               </p>
             )}
           </div>
-          {isSignBtnClicked ? (
+          {formType === 'signin' ? (
             <button
               className="loginSignInBtn"
               disabled={!isInfoAllValid}
@@ -266,7 +263,10 @@ class LoginSignInForm extends Component {
             </button>
           )}
         </form>
-        {isSignBtnClicked ? (
+        {formType === 'login' && (
+          <p className="lostPassword">비밀번호를 잊어버리셨나요?</p>
+        )}
+        {formType === 'signin' ? (
           <p className="suggestSignIn suggestLogin">
             이미 가입하셨나요?
             <span className="loginSignInLink" onClick={goToLoginModal}>
@@ -274,15 +274,12 @@ class LoginSignInForm extends Component {
             </span>
           </p>
         ) : (
-          <>
-            <p className="lostPassword">비밀번호를 잊어버리셨나요?</p>
-            <p className="suggestSignIn">
-              계정이 없으신가요?
-              <span className="loginSignInLink" onClick={goToSignInModal}>
-                회원가입
-              </span>
-            </p>
-          </>
+          <p className="suggestSignIn">
+            계정이 없으신가요?
+            <span className="loginSignInLink" onClick={goToSignInModal}>
+              회원가입
+            </span>
+          </p>
         )}
       </ModalLogoLayout>
     );
