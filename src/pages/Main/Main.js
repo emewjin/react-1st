@@ -14,7 +14,6 @@ class Main extends React.Component {
     };
   }
 
-  //백엔드에서 데이터 받아오는 함수
   getMovieListData = address => {
     return fetch(address)
       .then(res => res.json())
@@ -68,10 +67,12 @@ class Main extends React.Component {
   };
 
   componentDidMount() {
-    this.getMovieListData(API_URLS['MAIN_BOX_OFFICE'])
-      .then(() => this.getMovieListData(API_URLS['MAIN_NETFLIX']))
-      .then(() => this.getMovieListData(API_URLS['MAIN_YOUNGCHA']))
-      .then(() => this.getMockData());
+    this.getMockData();
+    //서버 연결시 확인
+    // this.getMovieListData(API_URLS['MAIN_BOX_OFFICE'])
+    //   .then(() => this.getMovieListData(API_URLS['MAIN_NETFLIX']))
+    //   .then(() => this.getMovieListData(API_URLS['MAIN_YOUNGCHA']))
+    //   .then(() => this.getMockData());
     window.addEventListener('scroll', this.infiniteScroll);
   }
 

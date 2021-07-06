@@ -1,6 +1,7 @@
 import React from 'react';
 import './MainSectionMovieList.scss';
 import { withRouter } from 'react-router-dom';
+
 class MainSectionMovieList extends React.Component {
   goToDetailPage = () => {
     const id = this.props.id;
