@@ -6,14 +6,16 @@
   .movieBannerPoster {
     display: flex;
     justify-content: center;
-    background-image: linear-gradient(to right, white, black, white);
-
     .stillCut {
       height: 460px;
-      box-shadow: 0px -20px 100px black;
     }
   }
 
+  .gradient-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+  }
   .movieSimpleInformation {
     @include flexSet();
     background-repeat: no-repeat;

@@ -1,18 +1,28 @@
 import React from 'react';
 import StarRating from '../../../CommonComponents/StarRating';
+import Grade from 'grade-js';
 import './MovieBannerSection.scss';
 
 export default class MovieBannerSection extends React.Component {
+  componentDidMount() {
+    window.addEventListener('load', function () {
+      Grade(document.querySelectorAll('.gradient-wrap'));
+    });
+  }
   render() {
     const { movieInformation } = this.props;
     return (
       <section className="MovieBannerSection">
         <div className="movieBannerPoster">
-          <img
-            alt="stillCut"
-            src={movieInformation[0]?.['background_img']}
-            className="stillCut"
-          />
+          <div className="gradient-wrap">
+            <img
+              alt="stillCut"
+              src="/images/sample2.jpg"
+              // src={movieInformation[0]?.['background_img']}
+              className="stillCut"
+              cross-origin="anonymous"
+            />
+          </div>
         </div>
         <div className="movieSimpleInformation">
           <div className="movieSimpleInformationContents">
