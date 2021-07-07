@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import API_URLS from '../../config';
@@ -17,57 +18,76 @@ class LoginSignUpForm extends Component {
     };
   }
 
-  requestLogin = e => {
+  requestLogin = async e => {
     e.preventDefault();
-    fetch(API_URLS.LOGIN, {
-      method: 'POST',
-      body: JSON.stringify({
+    const loginResult = await axios.post(
+      API_URLS.LOGIN,
+      {
         email: this.state.id,
         password: this.state.pw,
-      }),
-    })
-      .then(res => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        alert('아이디와 비밀번호를 확인해주세요');
-        throw new Error('fail to login');
-      })
-      .then(res => {
-        if (res) {
-          localStorage.setItem('TOKEN', res.token);
-          this.props.checkUserLogined();
-          this.props.history.push('/review');
-        } else {
-          alert('로그인 하세요');
-        }
-      });
+      },
+      {
+        validateStatus: status => {
+          return status < 500;
+        },
+      }
+    );
+
+    switch (loginResult.status) {
+      case 200:
+        alert('환영합니다');
+        localStorage.setItem('TOKEN', loginResult.data.token);
+        this.props.checkUserLogined();
+        this.props.history.push('/review');
+        break;
+
+      case 400:
+        alert('정보를 모두 입력해주세요');
+        break;
+
+      case 401:
+        alert('올바른 아이디 또는 비밀번호인지 확인해주세요');
+        break;
+
+      default:
+        alert('알 수 없는 에러가 발생했습니다');
+    }
   };
 
-  requestSignUp = e => {
+  requestSignUp = async e => {
     e.preventDefault();
-    fetch(API_URLS.SIGNUP, {
-      method: 'POST',
-      body: JSON.stringify({
+    const signUpResult = await axios.post(
+      API_URLS.SIGNUP,
+      {
         name: this.state.name,
         email: this.state.id,
         password: this.state.pw,
-      }),
-    })
-      .then(res => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        alert('입력된 정보를 확인해주세요');
-        throw new Error('fail to sign up');
-      })
-      .then(() => {
-        this.props.closeModal();
+      },
+      {
+        validateStatus: status => {
+          return status < 500;
+        },
+      }
+    );
+
+    switch (signUpResult.status) {
+      case 200:
         alert('회원가입 성공');
-      })
-      .catch(error => {
-        alert(error);
-      });
+        this.props.closeModal();
+        break;
+
+      case 400:
+        alert('정보를 모두 입력해주세요');
+        break;
+
+      case 401:
+        alert('올바른 형식의 정보인지 확인해주세요');
+        break;
+
+      default:
+        alert('알 수 없는 에러가 발생했습니다');
+        console.log(signUpResult.error);
+    }
   };
 
   handleInput = e => {
@@ -124,7 +144,7 @@ class LoginSignUpForm extends Component {
 
   render() {
     const { id, pw, name, isOnceBlured } = this.state;
-    const { goToLoginModal, goToSignUpModal, formType } = this.props;
+    const { switchLoginSignUpForm, formType } = this.props;
     const {
       handleInput,
       requestLogin,
@@ -262,16 +282,24 @@ class LoginSignUpForm extends Component {
         {formType === 'signUp' ? (
           <p className="suggestSignUp suggestLogin">
             이미 가입하셨나요?
-            <span className="loginSignUpLink" onClick={goToLoginModal}>
+            <button
+              className="loginSignUpLink"
+              name="login"
+              onClick={switchLoginSignUpForm}
+            >
               로그인
-            </span>
+            </button>
           </p>
         ) : (
           <p className="suggestSignUp">
             계정이 없으신가요?
-            <span className="loginSignUpLink" onClick={goToSignUpModal}>
+            <button
+              className="loginSignUpLink"
+              name="signUp"
+              onClick={switchLoginSignUpForm}
+            >
               회원가입
-            </span>
+            </button>
           </p>
         )}
       </ModalLogoLayout>

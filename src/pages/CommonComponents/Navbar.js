@@ -30,21 +30,20 @@ class Navbar extends Component {
     });
   };
 
-  clickSignUp = () => {
+  openLoginSignUpForm = e => {
     this.setState({
       modalOpened: true,
-      formType: 'signUp',
+      formType: e.target.name,
     });
   };
 
-  clickLogin = () => {
+  switchLoginSignUpForm = e => {
     this.setState({
-      modalOpened: true,
-      formType: 'login',
+      formType: e.target.name,
     });
   };
 
-  clickLogout = () => {
+  logout = () => {
     localStorage.removeItem('TOKEN');
     localStorage.removeItem('NAME');
     this.setState({
@@ -53,35 +52,29 @@ class Navbar extends Component {
     this.props.history.push('/');
   };
 
-  goToLoginModal = () => {
-    this.setState({
-      formType: 'login',
-    });
-  };
-
-  goToSignUpModal = () => {
-    this.setState({
-      formType: 'signUp',
-    });
-  };
-
   render() {
     const { isUserLogined, modalOpened, formType } = this.state;
     const {
       closeModal,
-      clickSignUp,
-      clickLogin,
-      clickLogout,
+      openLoginSignUpForm,
+      logout,
       checkUserLogined,
-      goToLoginModal,
-      goToSignUpModal,
+      switchLoginSignUpForm,
     } = this;
     const logoutedBtn = (
       <>
-        <button className="navLoginBtn" name="login" onClick={clickLogin}>
+        <button
+          className="navLoginBtn"
+          name="login"
+          onClick={openLoginSignUpForm}
+        >
           로그인
         </button>
-        <button className="navSignUpBtn" name="signUp" onClick={clickSignUp}>
+        <button
+          className="navSignUpBtn"
+          name="signUp"
+          onClick={openLoginSignUpForm}
+        >
           회원가입
         </button>
       </>
@@ -91,7 +84,7 @@ class Navbar extends Component {
         <button className="navLogoutBtn">
           <Link to="/review">평가하기</Link>
         </button>
-        <button className="navLogoutBtn" onClick={clickLogout}>
+        <button className="navLogoutBtn" onClick={logout}>
           로그아웃
         </button>
         <button>
@@ -112,8 +105,7 @@ class Navbar extends Component {
                 closeModal={closeModal}
                 formType={formType}
                 checkUserLogined={checkUserLogined}
-                goToLoginModal={goToLoginModal}
-                goToSignUpModal={goToSignUpModal}
+                switchLoginSignUpForm={switchLoginSignUpForm}
               />
             }
           />

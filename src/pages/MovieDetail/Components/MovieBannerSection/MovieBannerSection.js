@@ -17,7 +17,7 @@ export default class MovieBannerSection extends React.Component {
           <div className="gradient-wrap">
             <img
               alt="stillCut"
-              src="/images/sample2.jpg"
+              src="/images/lala.jpg"
               // src={movieInformation[0]?.['background_img']}
               className="stillCut"
               cross-origin="anonymous"
