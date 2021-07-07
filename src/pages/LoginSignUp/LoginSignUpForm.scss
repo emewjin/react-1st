@@ -88,7 +88,7 @@
     line-height: 18px;
   }
 
-  .loginSignInBtn {
+  .loginSignUpBtn {
     all: unset;
     margin-top: 20px;
     width: 335px;
@@ -103,7 +103,7 @@
 }
 
 .lostPassword,
-.suggestSignIn {
+.suggestSignUp {
   color: $list-sub-gray;
   font-size: 0.9375rem;
   font-weight: 400;
@@ -119,7 +119,7 @@
   color: $hot-pink;
 }
 
-.loginSignInLink {
+.loginSignUpLink {
   margin-left: 5px;
   color: $hot-pink;
   cursor: pointer;

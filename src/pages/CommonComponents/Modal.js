@@ -59,7 +59,7 @@ ex.<Modal
 ------------
 2. Modal 안에 넣을 컴포넌트를 부모 컴포넌트에서 전달해주세요. props 이름은 childComponent입니다.
 ex.<Modal
-      childComponent={<LoginSignInForm />}
+      childComponent={<LoginSignUpForm />}
     />
 ------------
 */

@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
-import LoginSignInForm from '../LoginSignIn/LoginSignInForm';
+import LoginSignUpForm from '../LoginSignUp/LoginSignUpForm';
 import './Navbar.scss';
 
 class Navbar extends Component {
@@ -30,10 +30,10 @@ class Navbar extends Component {
     });
   };
 
-  clickSignIn = () => {
+  clickSignUp = () => {
     this.setState({
       modalOpened: true,
-      formType: 'signin',
+      formType: 'signUp',
     });
   };
 
@@ -59,9 +59,9 @@ class Navbar extends Component {
     });
   };
 
-  goToSignInModal = () => {
+  goToSignUpModal = () => {
     this.setState({
-      formType: 'signin',
+      formType: 'signUp',
     });
   };
 
@@ -69,19 +69,19 @@ class Navbar extends Component {
     const { isUserLogined, modalOpened, formType } = this.state;
     const {
       closeModal,
-      clickSignIn,
+      clickSignUp,
       clickLogin,
       clickLogout,
       checkUserLogined,
       goToLoginModal,
-      goToSignInModal,
+      goToSignUpModal,
     } = this;
     const logoutedBtn = (
       <>
-        <button className="navLoginBtn" onClick={clickLogin}>
+        <button className="navLoginBtn" name="login" onClick={clickLogin}>
           로그인
         </button>
-        <button className="navSignInBtn" onClick={clickSignIn}>
+        <button className="navSignUpBtn" name="signUp" onClick={clickSignUp}>
           회원가입
         </button>
       </>
@@ -108,12 +108,12 @@ class Navbar extends Component {
           <Modal
             closeModal={closeModal}
             childComponent={
-              <LoginSignInForm
+              <LoginSignUpForm
                 closeModal={closeModal}
                 formType={formType}
                 checkUserLogined={checkUserLogined}
                 goToLoginModal={goToLoginModal}
-                goToSignInModal={goToSignInModal}
+                goToSignUpModal={goToSignUpModal}
               />
             }
           />

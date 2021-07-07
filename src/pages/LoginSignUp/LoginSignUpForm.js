@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import API_URLS from '../../config';
 import ModalLogoLayout from '../CommonComponents/ModalLogoLayout';
-import './LoginSignInForm.scss';
+import './LoginSignUpForm.scss';
 
-class LoginSignInForm extends Component {
+class LoginSignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ class LoginSignInForm extends Component {
       });
   };
 
-  requestSignIn = e => {
+  requestSignUp = e => {
     e.preventDefault();
     fetch(API_URLS.SIGNUP, {
       method: 'POST',
@@ -59,7 +59,7 @@ class LoginSignInForm extends Component {
           return res.json();
         }
         alert('입력된 정보를 확인해주세요');
-        throw new Error('fail to sign in');
+        throw new Error('fail to sign up');
       })
       .then(() => {
         this.props.closeModal();
@@ -124,11 +124,11 @@ class LoginSignInForm extends Component {
 
   render() {
     const { id, pw, name, isOnceBlured } = this.state;
-    const { goToLoginModal, goToSignInModal, formType } = this.props;
+    const { goToLoginModal, goToSignUpModal, formType } = this.props;
     const {
       handleInput,
       requestLogin,
-      requestSignIn,
+      requestSignUp,
       handleDeleteBtn,
       checkIdValid,
       checkPwValid,
@@ -147,7 +147,7 @@ class LoginSignInForm extends Component {
           {formType === 'login' ? '로그인' : '회원가입'}
         </h2>
         <form className="form">
-          {formType === 'signin' && (
+          {formType === 'signUp' && (
             <div
               className={`inputDiv ${
                 isNameValid === false && 'warningInputDiv'
@@ -238,17 +238,17 @@ class LoginSignInForm extends Component {
               </p>
             )}
           </div>
-          {formType === 'signin' ? (
+          {formType === 'signUp' ? (
             <button
-              className="loginSignInBtn"
+              className="loginSignUpBtn"
               disabled={!isInfoAllValid}
-              onClick={requestSignIn}
+              onClick={requestSignUp}
             >
               회원가입
             </button>
           ) : (
             <button
-              className="loginSignInBtn"
+              className="loginSignUpBtn"
               disabled={!isIdPwBothValid}
               onClick={requestLogin}
             >
@@ -259,17 +259,17 @@ class LoginSignInForm extends Component {
         {formType === 'login' && (
           <p className="lostPassword">비밀번호를 잊어버리셨나요?</p>
         )}
-        {formType === 'signin' ? (
-          <p className="suggestSignIn suggestLogin">
+        {formType === 'signUp' ? (
+          <p className="suggestSignUp suggestLogin">
             이미 가입하셨나요?
-            <span className="loginSignInLink" onClick={goToLoginModal}>
+            <span className="loginSignUpLink" onClick={goToLoginModal}>
               로그인
             </span>
           </p>
         ) : (
-          <p className="suggestSignIn">
+          <p className="suggestSignUp">
             계정이 없으신가요?
-            <span className="loginSignInLink" onClick={goToSignInModal}>
+            <span className="loginSignUpLink" onClick={goToSignUpModal}>
               회원가입
             </span>
           </p>
@@ -279,4 +279,4 @@ class LoginSignInForm extends Component {
   }
 }
 
-export default withRouter(LoginSignInForm);
+export default withRouter(LoginSignUpForm);
