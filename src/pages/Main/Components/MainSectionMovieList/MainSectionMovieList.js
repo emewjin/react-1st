@@ -1,6 +1,6 @@
 import React from 'react';
-import './MainSectionMovieList.scss';
 import { withRouter } from 'react-router-dom';
+import './MainSectionMovieList.scss';
 
 class MainSectionMovieList extends React.Component {
   goToDetailPage = () => {
@@ -8,16 +8,16 @@ class MainSectionMovieList extends React.Component {
     this.props.history.push(`/detail/${id}`);
   };
   render() {
+    const { width, movieListRanking } = this.props;
     const {
-      title,
+      korean_title,
       country,
-      releaseDate,
-      thumbnailImgUrl,
-      width,
+      release_date,
+      thumbnail_img,
       netflix,
       watcha,
-      movieListRanking,
-    } = this.props;
+    } = this.props.movieData;
+
     return (
       <li
         onClick={this.goToDetailPage}
@@ -33,11 +33,11 @@ class MainSectionMovieList extends React.Component {
           }
         ></div>
         <div className="listRanking">{movieListRanking + 1}</div>
-        <img alt="test" src={thumbnailImgUrl} />
+        <img className="movieListPoster" alt="test" src={thumbnail_img} />
         <div className="listDescription">
-          <p className="listDescriptionTitle">{title}</p>
+          <p className="listDescriptionTitle">{korean_title}</p>
           <p className="listDescriptionYear">
-            {country} ・ {releaseDate.slice(0, 4)}
+            {country} ・ {release_date.slice(0, 4)}
           </p>
         </div>
       </li>

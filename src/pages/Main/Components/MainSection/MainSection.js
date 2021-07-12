@@ -1,12 +1,15 @@
 import React from 'react';
 import MainSectionMovieList from '../MainSectionMovieList/MainSectionMovieList';
+import Skeleton from '../../../CommonComponents/Skeleton';
 import './MainSection.scss';
+
 export default class MainSection extends React.Component {
   constructor() {
     super();
     this.state = {
       movieListContainerWidth: 0,
       movieListIndex: 1,
+      isLoading: true,
     };
     this.containerWidth = React.createRef();
   }
@@ -39,7 +42,7 @@ export default class MainSection extends React.Component {
   };
 
   render() {
-    const { movieListContainerWidth, movieListIndex } = this.state;
+    const { movieListContainerWidth, movieListIndex, isLoading } = this.state;
     const { movieInformationList, movieTitle } = this.props;
     return (
       <section className="mainSection">
@@ -54,31 +57,17 @@ export default class MainSection extends React.Component {
           <i className="fas fa-chevron-left"></i>
         </button>
         <section className="mainMovie" ref={this.containerWidth}>
-          <ul>
+          <ul className="mainMovieLists">
             {movieInformationList.map((movie, movieListRanking) => {
-              const {
-                id,
-                korean_title,
-                country,
-                release_date,
-                thumbnail_img,
-                english_title,
-                netflix,
-                watcha,
-              } = movie;
-              return (
+              const { id } = movie;
+              return isLoading ? (
+                <Skeleton key={id} />
+              ) : (
                 <MainSectionMovieList
                   id={id}
-                  goToDetail={this.props.goToDetailPage}
-                  movieListRanking={movieListRanking}
-                  englishTitle={english_title}
                   key={id}
-                  title={korean_title}
-                  country={country}
-                  releaseDate={release_date}
-                  thumbnailImgUrl={thumbnail_img}
-                  watcha={watcha}
-                  netflix={netflix}
+                  movieData={movie}
+                  movieListRanking={movieListRanking}
                   width={movieListContainerWidth}
                 />
               );

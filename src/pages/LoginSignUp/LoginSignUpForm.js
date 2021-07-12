@@ -20,6 +20,7 @@ class LoginSignUpForm extends Component {
 
   requestLogin = async e => {
     e.preventDefault();
+
     const loginResult = await axios.post(
       API_URLS.LOGIN,
       {

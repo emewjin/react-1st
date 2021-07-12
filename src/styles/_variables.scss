@@ -43,10 +43,17 @@ $wrong-background: #fff0f0;
   align-items: $align;
 }
 
-$breakpoint: 800px;
+$tablet: 850px;
+$mobile: 570px;
 
 @mixin tablet {
-  @media (max-width: #{$breakpoint}) {
+  @media (max-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$mobile}) {
     @content;
   }
 }

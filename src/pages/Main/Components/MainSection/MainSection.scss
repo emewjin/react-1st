@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.scss';
+@import '/src/styles/variables.scss';
 
 .mainSection {
   @include flexColumnSet;
@@ -19,20 +19,15 @@
   }
 
   .mainMovie {
-    @include flexSet;
     position: relative;
     width: 85vw;
     max-width: 1400px;
     overflow: hidden;
 
-    ul {
-      @include flexSet(flex-start);
-      width: 100%;
-      overflow: hidden;
-      height: 100%;
+    .mainMovieLists {
+      display: flex;
+      white-space: nowrap;
     }
-
-    background-color: $white;
   }
 
   .mainMoviePreBtn {

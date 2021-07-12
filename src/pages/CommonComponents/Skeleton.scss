@@ -1,0 +1,66 @@
+@import '/src/styles/variables.scss';
+
+.skeletonList {
+  @include flexColumnSet(center, stretch);
+  margin: 0 10px;
+  width: 20%;
+
+  @include tablet {
+    width: 25%;
+  }
+
+  @include mobile {
+    width: 33.3%;
+  }
+}
+
+.skeletonPoster {
+  padding: 0 5px;
+  height: 238px;
+  background-color: whitesmoke;
+  overflow: hidden;
+  position: relative;
+}
+
+.skeletonDescriptionTitle {
+  height: 20px;
+  margin: 7px 0;
+  background-color: whitesmoke;
+  overflow: hidden;
+  position: relative;
+}
+
+.skeletonDescriptionYear {
+  height: 14px;
+  background-color: whitesmoke;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100px);
+  }
+  50%,
+  100% {
+    transform: translateX(400px);
+  }
+}
+
+.skeletonPoster::before,
+.skeletonDescriptionTitle::before,
+.skeletonDescriptionYear::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  animation: loading 1.5s infinite linear;
+}
