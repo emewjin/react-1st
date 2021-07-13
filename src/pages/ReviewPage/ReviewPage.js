@@ -21,18 +21,7 @@ export default class ReviewPage extends Component {
     this.scrollBoxRef = createRef();
   }
 
-  // checkLoading = (entries, observer) => {
-  //   entries.forEach(entry => {
-  //     //타겟 요소가 바뀔 부분
-  //   });
-  // };
-
   componentDidMount() {
-    // let scrollObserver = new IntersectionObserver(this.checkLoading, {
-    //   root: this.scrollBoxRef,
-    //   threshold: 0.5,
-    // });
-    // scrollObserver.observe(target);
     setTimeout(() => {
       this.isLoading = false;
     }, 5000);
