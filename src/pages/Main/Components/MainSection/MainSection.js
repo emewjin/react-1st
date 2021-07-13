@@ -41,6 +41,12 @@ export default class MainSection extends React.Component {
     });
   };
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 3000);
+  }
+
   render() {
     const { movieListContainerWidth, movieListIndex, isLoading } = this.state;
     const { movieInformationList, movieTitle } = this.props;
