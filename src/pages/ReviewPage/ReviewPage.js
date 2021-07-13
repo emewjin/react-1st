@@ -5,6 +5,7 @@ import FilterGenreMenu from './Component/FilterGenreMenu';
 import Modal from '../CommonComponents/Modal';
 import API_URLS from '../../config';
 import './ReviewPage.scss';
+import SkeletonReviewMovieList from './Component/SkeletonReviewMovieList';
 
 export default class ReviewPage extends Component {
   constructor(props) {
@@ -124,7 +125,7 @@ export default class ReviewPage extends Component {
   };
 
   render() {
-    const { movieData, ratingsCount, modalOpened } = this.state;
+    const { movieData, ratingsCount, modalOpened, isLoading } = this.state;
     const {
       getMovieData,
       openFilterGenre,
@@ -168,17 +169,21 @@ export default class ReviewPage extends Component {
           </header>
           <div className="reviewList" ref={this.scrollBoxRef}>
             <ul>
-              {movieData.map(movie => (
-                <ReviewMovieList
-                  key={movie.movie_id}
-                  id={movie.movie_id}
-                  movieTitle={movie.title}
-                  imgSrc={movie.thumbnail}
-                  movieReleaseDate={movie['release_date']}
-                  movieCountry={movie.country}
-                  updateRatingCount={updateRatingCount}
-                />
-              ))}
+              {movieData.map(movie =>
+                isLoading ? (
+                  <SkeletonReviewMovieList key={movie.movie_id} />
+                ) : (
+                  <ReviewMovieList
+                    key={movie.movie_id}
+                    id={movie.movie_id}
+                    movieTitle={movie.title}
+                    imgSrc={movie.thumbnail}
+                    movieReleaseDate={movie['release_date']}
+                    movieCountry={movie.country}
+                    updateRatingCount={updateRatingCount}
+                  />
+                )
+              )}
             </ul>
           </div>
         </section>
