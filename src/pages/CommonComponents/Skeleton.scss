@@ -18,17 +18,9 @@
 .skeletonPoster {
   position: relative;
   padding: 0 5px;
-  height: 300px;
   background-color: whitesmoke;
   overflow: hidden;
-
-  @include tablet {
-    height: 200px;
-  }
-
-  @include mobile {
-    height: 180px;
-  }
+  padding-top: 150%;
 }
 
 .skeletonDescriptionTitle {
