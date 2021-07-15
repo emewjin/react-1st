@@ -18,27 +18,49 @@ class LoginSignUpForm extends Component {
     };
   }
 
+  onSilentRefresh = () => {
+    axios
+      .post('/silent-refresh', data)
+      .then(onLoginSuccess)
+      .catch(error => {
+        // ... 로그인 실패 처리
+      });
+  };
+
+  onLoginSuccess = res => {
+    const { accessToken } = res.data;
+
+    // accessToken 설정
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+    // accessToken 만료하기 1분 전에 로그인 연장
+    setTimeout(this.onSilentRefresh, JWT_EXPIRRY_TIME - 60000);
+  };
+
   requestLogin = async e => {
     e.preventDefault();
 
-    const loginResult = await axios.post(
-      API_URLS.LOGIN,
-      {
-        email: this.state.id,
-        password: this.state.pw,
-      },
-      {
-        validateStatus: status => {
-          return status < 500;
+    const loginResult = await axios
+      .post(
+        API_URLS.LOGIN,
+        {
+          email: this.state.id,
+          password: this.state.pw,
         },
-      }
-    );
+        {
+          validateStatus: status => {
+            return status < 500;
+          },
+        }
+      )
+      .then(this.onLoginSuccess)
+      .catch(error => alert(error));
 
     switch (loginResult.status) {
       case 200:
         alert('환영합니다');
-        localStorage.setItem('TOKEN', loginResult.data.token);
-        this.props.checkUserLogined();
+        // localStorage.setItem('TOKEN', loginResult.data.token);
+        // this.props.checkUserLogined();
         this.props.history.push('/review');
         break;
 
@@ -72,7 +94,7 @@ class LoginSignUpForm extends Component {
     );
 
     switch (signUpResult.status) {
-      case 200:
+      case 201:
         alert('회원가입 성공');
         this.props.closeModal();
         break;

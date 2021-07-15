@@ -18,6 +18,7 @@ class Main extends React.Component {
     return fetch(address)
       .then(res => res.json())
       .then(movieList => {
+        console.log(movieList);
         this.setState({
           movieInformationList: [
             ...this.state.movieInformationList,
@@ -27,57 +28,56 @@ class Main extends React.Component {
       });
   };
 
-  getMockData = () => {
-    const { preItems, items } = this.state;
-    return fetch('data/movieMockData.json')
-      .then(res => res.json())
-      .then(movieList => {
-        const movieListToAdd = movieList.slice(preItems, items);
-        this.setState({
-          movieInformationList: [
-            ...this.state.movieInformationList,
-            ...movieListToAdd,
-          ],
-        });
-      });
-  };
+  // getMockData = () => {
+  //   const { preItems, items } = this.state;
+  //   return fetch('data/movieMockData.json')
+  //     .then(res => res.json())
+  //     .then(movieList => {
+  //       const movieListToAdd = movieList.slice(preItems, items);
+  //       this.setState({
+  //         movieInformationList: [
+  //           ...this.state.movieInformationList,
+  //           ...movieListToAdd,
+  //         ],
+  //       });
+  //     });
+  // };
 
   // 무한 스크롤
-  infiniteScroll = () => {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    const { preItems, items } = this.state;
+  // infiniteScroll = () => {
+  //   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  //   const { preItems, items } = this.state;
 
-    if (scrollTop >= scrollHeight - clientHeight) {
-      this.setState({
-        preItems: preItems + 1,
-        items: items + 1,
-      });
-      fetch('data/movieMockData.json')
-        .then(res => res.json())
-        .then(res => {
-          let result = res.slice(preItems + 1, items + 1);
-          this.setState({
-            movieInformationList: [
-              ...this.state.movieInformationList,
-              ...result,
-            ],
-          });
-        });
-    }
-  };
+  //   if (scrollTop >= scrollHeight - clientHeight) {
+  //     this.setState({
+  //       preItems: preItems + 1,
+  //       items: items + 1,
+  //     });
+  //     fetch('data/movieMockData.json')
+  //       .then(res => res.json())
+  //       .then(res => {
+  //         let result = res.slice(preItems + 1, items + 1);
+  //         this.setState({
+  //           movieInformationList: [
+  //             ...this.state.movieInformationList,
+  //             ...result,
+  //           ],
+  //         });
+  //       });
+  //   }
+  // };
 
   componentDidMount() {
     // this.getMockData();
-    //서버 연결시 확인
-    // this.getMovieListData(API_URLS['MAIN_BOX_OFFICE'])
-    //   .then(() => this.getMovieListData(API_URLS['MAIN_NETFLIX']))
-    //   .then(() => this.getMovieListData(API_URLS['MAIN_YOUNGCHA']))
-    //   .then(() => this.getMockData());
-    window.addEventListener('scroll', this.infiniteScroll);
+    this.getMovieListData(API_URLS['MAIN_BOX_OFFICE'])
+      .then(() => this.getMovieListData(API_URLS['MAIN_NETFLIX']))
+      .then(() => this.getMovieListData(API_URLS['MAIN_YOUNGCHA']));
+    // .then(() => this.getMockData());
+    // window.addEventListener('scroll', this.infiniteScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.infiniteScroll);
+    // window.removeEventListener('scroll', this.infiniteScroll);
   }
 
   render() {
