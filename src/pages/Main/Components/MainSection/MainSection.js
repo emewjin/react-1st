@@ -41,7 +41,6 @@ export default class MainSection extends React.Component {
   render() {
     const { movieListContainerWidth, movieListIndex } = this.state;
     const { movieInformationList, movieTitle } = this.props;
-    console.log('인덱스', movieListIndex, '이동x축', movieListContainerWidth);
     return (
       <section className="mainSection">
         <div className="mainTitle">

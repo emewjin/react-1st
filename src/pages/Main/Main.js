@@ -80,7 +80,6 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log('무비리스트', this.state.movieInformationList);
     return (
       <>
         {this.state.movieInformationList && (
