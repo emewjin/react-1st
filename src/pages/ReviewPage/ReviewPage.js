@@ -100,6 +100,7 @@ export default class ReviewPage extends Component {
     });
   };
 
+  //To Do : 잘 작동하는지 확인 return 값들
   getMessageByCount = countValue => {
     let message;
     Object.keys(MESSAGE).some(ranges => {
@@ -107,8 +108,8 @@ export default class ReviewPage extends Component {
       const [rangeA, rangeB] = rangeArr;
       if (+countValue >= rangeA && +countValue <= (rangeB || rangeA)) {
         message = MESSAGE[ranges];
-        return true;
       }
+      return true;
     });
     return message;
   };
