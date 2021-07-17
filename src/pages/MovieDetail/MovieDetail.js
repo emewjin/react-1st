@@ -3,7 +3,7 @@ import MovieBannerSection from './Components/MovieBannerSection/MovieBannerSecti
 import LeaveCommentSection from './Components/LeaveCommentSection/LeaveCommentSection';
 import ShowComment from './Components/LeaveCommentSection/ShowComment';
 import MovieDetailContentsSection from './Components/MovieDetailContentsSection/MovieDetailContentsSection';
-import API_URLS from '../../config';
+import API_URLS from 'config';
 
 import './MovieDetail.scss';
 

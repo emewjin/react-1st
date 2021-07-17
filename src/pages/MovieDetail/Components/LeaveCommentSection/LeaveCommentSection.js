@@ -1,6 +1,6 @@
 import React from 'react';
 import './LeaveCommentSection.scss';
-import Modal from '../../../CommonComponents/Modal';
+import Modal from 'pages/CommonComponents/Modal';
 import CommentModal from './CommentModal';
 
 export default class LeaveCommentSection extends React.Component {

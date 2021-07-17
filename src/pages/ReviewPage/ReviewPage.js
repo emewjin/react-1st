@@ -1,11 +1,11 @@
 import React, { Component, createRef } from 'react';
-import { throttle } from '../../utils/throttle';
+import { throttle } from 'utils/throttle';
 import ReviewMovieList from './Component/ReviewMovieList';
 import FilterGenreMenu from './Component/FilterGenreMenu';
-import Modal from '../CommonComponents/Modal';
-import API_URLS from '../../config';
-import './ReviewPage.scss';
+import Modal from 'pages/CommonComponents/Modal';
 import SkeletonReviewMovieList from './Component/SkeletonReviewMovieList';
+import API_URLS from 'config';
+import './ReviewPage.scss';
 
 export default class ReviewPage extends Component {
   constructor(props) {

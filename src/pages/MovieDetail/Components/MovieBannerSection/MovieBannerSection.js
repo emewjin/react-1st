@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRating from '../../../CommonComponents/StarRating';
+import StarRating from 'pages/CommonComponents/StarRating';
 import Grade from 'grade-js';
 import './MovieBannerSection.scss';
 

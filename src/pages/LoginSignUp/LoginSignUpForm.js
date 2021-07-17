@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import API_URLS from '../../config';
-import ModalLogoLayout from '../CommonComponents/ModalLogoLayout';
+import API_URLS from 'config';
+import ModalLogoLayout from 'pages/CommonComponents/ModalLogoLayout';
 import './LoginSignUpForm.scss';
 
 const JWT_EXPIRY_TIME = 24 * 3600 * 1000;

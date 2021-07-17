@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import StarRating from '../../CommonComponents/StarRating';
-import API_URLS from '../../../config';
+import StarRating from 'pages/CommonComponents/StarRating';
+import API_URLS from 'config';
 import './ReviewMovieList.scss';
 
 export default class ReviewMovieList extends Component {

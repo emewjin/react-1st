@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import MainSection from './Components/MainSection/MainSection';
-import API_URLS from '../../config';
+import API_URLS from 'config';
 import './Main.scss';
 
 class Main extends React.Component {

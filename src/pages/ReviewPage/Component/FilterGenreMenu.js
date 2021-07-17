@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MenuList from './MenuList';
-import API_URLS from '../../../config';
+import API_URLS from 'config';
 import './FilterGenreMenu.scss';
 
 export default class FilterGenreMenu extends Component {

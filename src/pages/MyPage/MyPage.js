@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import API_URLS from '../../config';
+import API_URLS from 'config';
 import './MyPage.scss';
 
 class MyPage extends Component {

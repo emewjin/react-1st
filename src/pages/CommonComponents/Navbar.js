@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
-import LoginSignUpForm from '../LoginSignUp/LoginSignUpForm';
+import LoginSignUpForm from 'pages/LoginSignUp/LoginSignUpForm';
 import './Navbar.scss';
 
 class Navbar extends Component {

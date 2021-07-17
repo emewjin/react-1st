@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../Main/Components/MainSectionMovieList/MainSectionMovieList.scss';
+import 'pages/Main/Components/MainSectionMovieList/MainSectionMovieList.scss';
 import './Skeleton.scss';
 
 export default class Skeleton extends Component {

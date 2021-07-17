@@ -1,4 +1,4 @@
-@import '/src/styles/variables.scss';
+@import 'styles/variables.scss';
 
 .mainSectionMovieList {
   @include flexColumnSet(center, stretch);

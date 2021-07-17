@@ -1,6 +1,6 @@
 import React from 'react';
 import MainSectionMovieList from '../MainSectionMovieList/MainSectionMovieList';
-import Skeleton from '../../../CommonComponents/Skeleton';
+import Skeleton from 'pages/CommonComponents/Skeleton';
 import './MainSection.scss';
 
 export default class MainSection extends React.Component {
