@@ -7,6 +7,8 @@ import API_URLS from '../../config';
 import ModalLogoLayout from '../CommonComponents/ModalLogoLayout';
 import './LoginSignUpForm.scss';
 
+const JWT_EXPIRY_TIME = 24 * 3600 * 1000;
+
 class LoginSignUpForm extends Component {
   constructor(props) {
     super(props);
@@ -18,41 +20,49 @@ class LoginSignUpForm extends Component {
     };
   }
 
+  //https://slog.website/post/10
+
   onSilentRefresh = () => {
+    const loginData = {
+      email: this.state.id,
+      password: this.state.pw,
+    };
+
     axios
-      .post('/silent-refresh', data)
-      .then(onLoginSuccess)
+      .post('/silent-refresh', loginData)
+      .then(this.onLoginSuccess)
       .catch(error => {
         // ... 로그인 실패 처리
+        console.log(error);
+        alert('로그인에 실패했습니다');
       });
   };
+  //
 
   onLoginSuccess = res => {
     const { accessToken } = res.data;
 
-    // accessToken 설정
+    // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+    // accessToken을 localStorage, cookie 등에 저장하지 않는다!
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
     // accessToken 만료하기 1분 전에 로그인 연장
-    setTimeout(this.onSilentRefresh, JWT_EXPIRRY_TIME - 60000);
+    setTimeout(this.onSilentRefresh, JWT_EXPIRY_TIME - 60000);
   };
 
-  requestLogin = async e => {
+  requestLogin = e => {
     e.preventDefault();
+    const loginData = {
+      email: this.state.id,
+      password: this.state.pw,
+    };
 
-    const loginResult = await axios
-      .post(
-        API_URLS.LOGIN,
-        {
-          email: this.state.id,
-          password: this.state.pw,
+    const loginResult = axios
+      .post(API_URLS.LOGIN, loginData, {
+        validateStatus: status => {
+          return status < 500;
         },
-        {
-          validateStatus: status => {
-            return status < 500;
-          },
-        }
-      )
+      })
       .then(this.onLoginSuccess)
       .catch(error => alert(error));
 
@@ -187,7 +197,7 @@ class LoginSignUpForm extends Component {
     return (
       <ModalLogoLayout>
         <h2 className="formHeader">
-          {formType === 'login' ? '로그인' : '회원가입'}
+          {formType === 'signUp' ? '회원가입' : '로그인'}
         </h2>
         <form className="form">
           {formType === 'signUp' && (
