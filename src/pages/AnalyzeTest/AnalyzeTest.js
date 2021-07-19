@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import AnalyzeCardLayout from './Component/AnalyzeCardLayout';
 import AnalyzeFavorite from './Component/AnalyzeFavorite';
 import AnalyzeStarRate from './Component/AnalyzeStarRate';
@@ -15,12 +17,8 @@ export default class AnalyzeTest extends Component {
   }
 
   componentDidMount() {
-    let token = localStorage.getItem('TOKEN');
-    fetch(API_URLS['MYTEST_STAR'], {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios
+      .get(API_URLS['MYTEST_STAR'])
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -29,11 +27,8 @@ export default class AnalyzeTest extends Component {
       )
       .catch(error => alert('별점 받아오기 실패'));
 
-    fetch(API_URLS['MYTEST_GENRE'], {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios
+      .get(API_URLS['MYTEST_GENRE'])
       .then(res => res.json())
       .then(data => {
         this.setState({

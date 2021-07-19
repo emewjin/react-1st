@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import MovieBannerSection from './Components/MovieBannerSection/MovieBannerSection';
 import LeaveCommentSection from './Components/LeaveCommentSection/LeaveCommentSection';
 import ShowComment from './Components/LeaveCommentSection/ShowComment';
@@ -24,27 +26,25 @@ export default class MovieDetail extends React.Component {
 
   changeStateOfWish = () => {
     const movieId = this.props.match.params.id;
-    fetch(`${API_URLS.DETAIL}/${movieId}/wish`, {
-      method: 'POST',
-      headers: {
-        Authorization: localStorage.getItem('TOKEN'),
-      },
-      body: JSON.stringify({ movie_id: movieId }),
-    }).then(res => {
-      if (res.status === 201) {
-        return this.setState({ userWish: true, leaveComment: true });
-      }
-      if (res.status === 204) {
-        return this.setState({
-          userWish: false,
-          leaveComment: false,
-          showComment: false,
-        });
-      }
-      if (res.status === 401) {
-        return alert('로그인이 필요합니다!');
-      }
-    });
+    axios
+      .post(`${API_URLS.DETAIL}/${movieId}/wish`, {
+        movie_id: movieId,
+      })
+      .then(res => {
+        if (res.status === 201) {
+          return this.setState({ userWish: true, leaveComment: true });
+        }
+        if (res.status === 204) {
+          return this.setState({
+            userWish: false,
+            leaveComment: false,
+            showComment: false,
+          });
+        }
+        if (res.status === 401) {
+          return alert('로그인이 필요합니다!');
+        }
+      });
   };
 
   showCommentModal = () => {
@@ -64,45 +64,45 @@ export default class MovieDetail extends React.Component {
 
   commentSubmit = () => {
     const movieId = this.props.match.params.id;
-    fetch(`${API_URLS.DETAIL}/${movieId}/comment`, {
-      method: 'POST',
-      headers: {
-        Authorization: localStorage.getItem('TOKEN'),
-      },
-      body: JSON.stringify({ comment: this.state.commentInputValue }),
-    })
-      .then(res => res.json())
-      .then(res => {
+    axios
+      .post(`${API_URLS.DETAIL}/${movieId}/comment`, {
+        comment: this.state.commentInputValue,
+      })
+      .then(res => res.data)
+      .then(comment => {
         this.setState({
           commentModal: false,
           leaveComment: false,
           showComment: true,
-          comment_id: res['comment_id'],
+          comment_id: comment['comment_id'],
         });
       });
   };
 
+  //To Do : 제대로 동작하는지 확인 필요
   deleteComment = () => {
     const movieId = this.props.match.params.id;
     const { comment_id } = this.state;
-    fetch(`${API_URLS.DETAIL}/${movieId}/comment/${comment_id}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: localStorage.getItem('TOKEN'),
-      },
-      body: JSON.stringify({ comment: this.state.commentInputValue }),
-    }).then(() => {
-      this.setState({ comment_id: 0, leaveComment: true, showComment: false });
-    });
+    axios
+      .delete(`${API_URLS.DETAIL}/${movieId}/comment/${comment_id}`)
+      .then(() => {
+        this.setState({
+          comment_id: 0,
+          leaveComment: true,
+          showComment: false,
+        });
+      });
   };
 
+  //To Do : data 뭐 들어오는지 확인
   componentDidMount() {
     const movieId = this.props.match.params.id;
-    fetch(`${API_URLS.DETAIL}/${movieId}`)
-      .then(res => res.json())
-      .then(res =>
+    axios
+      .get(`${API_URLS.DETAIL}/${movieId}`)
+      .then(res => res.data)
+      .then(movieInfo =>
         this.setState({
-          movieInformation: [res['movie_information']],
+          movieInformation: [movieInfo['movie_information']],
         })
       );
 
@@ -111,15 +111,11 @@ export default class MovieDetail extends React.Component {
       this.getStar();
     }
 
-    fetch(`${API_URLS.DETAIL}/${movieId}`, {
-      method: 'GET',
-      headers: {
-        Authorization: localStorage.getItem('TOKEN'),
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res['movie_information']?.['wish_check'] === 1) {
+    axios
+      .get(`${API_URLS.DETAIL}/${movieId}`)
+      .then(res => res.data)
+      .then(movie => {
+        if (movie['movie_information']?.['wish_check'] === 1) {
           this.setState({
             userWish: true,
             leaveComment: true,
@@ -132,16 +128,12 @@ export default class MovieDetail extends React.Component {
   getStar = () => {
     const movieId = this.props.match.params.id;
 
-    fetch(`${API_URLS.DETAIL}/${movieId}`, {
-      method: 'GET',
-      headers: {
-        Authorization: localStorage.getItem('TOKEN'),
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
+    axios
+      .get(`${API_URLS.DETAIL}/${movieId}`)
+      .then(res => res.data)
+      .then(movie => {
         this.setState({
-          detailStarRate: res['movie_information']?.['star_check'],
+          detailStarRate: movie['movie_information']?.['star_check'],
         });
       });
   };
@@ -167,15 +159,9 @@ export default class MovieDetail extends React.Component {
 
   postStar = starRatingForPost => {
     const movieId = this.props.match.params.id;
-    fetch(`${API_URLS.DETAIL}/${movieId}/rating`, {
-      method: 'POST',
-      headers: {
-        Authorization: localStorage.getItem('TOKEN'),
-      },
-      body: JSON.stringify({
-        movie_id: movieId,
-        rating: starRatingForPost,
-      }),
+    axios.post(`${API_URLS.DETAIL}/${movieId}/rating`, {
+      movie_id: movieId,
+      rating: starRatingForPost,
     });
   };
 

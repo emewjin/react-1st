@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+
 import StarRating from 'pages/CommonComponents/StarRating';
 import API_URLS from 'config';
 import './ReviewMovieList.scss';
 
 export default class ReviewMovieList extends Component {
   postStar = starRatingForPost => {
-    fetch(API_URLS.REVIEW, {
-      method: 'POST',
-      headers: {
-        Authorization: localStorage.getItem('TOKEN'),
-      },
-      body: JSON.stringify({
+    axios
+      .post(API_URLS.REVIEW, {
         movie: this.props.id,
         rating: starRatingForPost,
-      }),
-    }).then(this.props.updateRatingCount);
+      })
+      .then(this.props.updateRatingCount);
   };
 
   render() {

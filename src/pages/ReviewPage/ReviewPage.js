@@ -1,4 +1,6 @@
 import React, { Component, createRef } from 'react';
+import axios from 'axios';
+
 import { throttle } from 'utils/throttle';
 import ReviewMovieList from './Component/ReviewMovieList';
 import FilterGenreMenu from './Component/FilterGenreMenu';
@@ -34,16 +36,12 @@ export default class ReviewPage extends Component {
   }
 
   getMovieData = id => {
-    let token = localStorage.getItem('TOKEN');
     const API = id ? `${API_URLS.REVIEW}?genre_id=${id}` : API_URLS.REVIEW;
-    fetch(API, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios
+      .get(API)
       .then(res => {
-        if (res.status === 200 && token) {
-          return res.json();
+        if (res.status === 200) {
+          return res.data;
         }
       })
       .then(res => {
@@ -71,15 +69,12 @@ export default class ReviewPage extends Component {
   };
 
   updateRatingCount = () => {
-    fetch(API_URLS.REVIEW, {
-      headers: {
-        Authorization: localStorage.getItem('TOKEN'),
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        const lastIndex = res['movie_random'].length - 1;
-        const ratingCountObject = res['movie_random'][lastIndex];
+    axios
+      .get(API_URLS.REVIEW)
+      .then(res => res.data)
+      .then(movies => {
+        const lastIndex = movies['movie_random'].length - 1;
+        const ratingCountObject = movies['movie_random'][lastIndex];
         const updatedRatingsCount = Object.values(ratingCountObject);
         this.setState({
           ratingsCount: updatedRatingsCount,

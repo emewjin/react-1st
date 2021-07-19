@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
 import API_URLS from 'config';
 import ModalLogoLayout from 'pages/CommonComponents/ModalLogoLayout';
 import './LoginSignUpForm.scss';

@@ -1,17 +1,16 @@
-const BASE_URL = 'https://api.youngchapedia.com';
 const API_URLS = {
-  MAIN_BOX_OFFICE: `${BASE_URL}/movies/movies?ranking=box-office`,
-  MAIN_YOUNGCHA: `${BASE_URL}/movies/movies?provider=watcha`,
-  MAIN_NETFLIX: `${BASE_URL}/movies/movies?provider=netflix`,
-  DETAIL: `${BASE_URL}/movies`,
-  COMMENT_LIKE: `${BASE_URL}/movies/comment/like`,
-  SIGNUP: `${BASE_URL}/users/signup`,
-  LOGIN: `${BASE_URL}/users/signin`,
-  REVIEW: `${BASE_URL}/users/review`,
-  REVIEW_GENRE: `${BASE_URL}/users/genre`,
-  MYPAGE: `${BASE_URL}/users/mypage`,
-  MYTEST_STAR: `${BASE_URL}/users/analysis`,
-  MYTEST_GENRE: `${BASE_URL}/users/favorite`,
+  MAIN_BOX_OFFICE: '/movies/movies?ranking=box-office',
+  MAIN_YOUNGCHA: '/movies/movies?provider=watcha',
+  MAIN_NETFLIX: '/movies/movies?provider=netflix',
+  DETAIL: '/movies',
+  COMMENT_LIKE: '/movies/comment/like',
+  SIGNUP: '/users/signup',
+  LOGIN: '/users/signin',
+  REVIEW: '/users/review',
+  REVIEW_GENRE: '/users/genre',
+  MYPAGE: '/users/mypage',
+  MYTEST_STAR: '/users/analysis',
+  MYTEST_GENRE: '/users/favorite',
 };
 
 export default API_URLS;

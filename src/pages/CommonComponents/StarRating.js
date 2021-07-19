@@ -65,19 +65,5 @@ How To Use
 
 3. POST 요청 함수는 postStar 이라는 이름의 props로 넘겨주세요
 
-4. POST 요청 함수는 부모 컴포넌트 안에 다음과 같이 작성해주세요
-
-postStar = starRatingForPost => {
-  fetch(API_URLS.REVIEW, {
-    method: 'POST',
-    headers: {
-      Authorization: localStorage.getItem('TOKEN'),
-    },
-    body: JSON.stringify({
-      movie: this.props.id,
-      rating: starRatingForPost,
-    }),
-  }).then(this.props.updateRatingCount);
-};
-----------------------------
+4. POST 요청 함수는 부모 컴포넌트 안에 작성해주세요
 */

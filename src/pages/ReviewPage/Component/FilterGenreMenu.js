@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import MenuList from './MenuList';
 import API_URLS from 'config';
 import './FilterGenreMenu.scss';
@@ -13,10 +15,11 @@ export default class FilterGenreMenu extends Component {
   }
 
   componentDidMount() {
-    fetch(API_URLS['REVIEW_GENRE'])
+    axios
+      .get(API_URLS['REVIEW_GENRE'])
       .then(res => {
         if (res.status === 200) {
-          return res.json();
+          return res.data;
         }
       })
       .then(res => this.setState({ genreMenus: res['genre_list'] }));

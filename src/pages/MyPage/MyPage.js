@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+
 import API_URLS from 'config';
 import './MyPage.scss';
 
@@ -12,12 +14,8 @@ class MyPage extends Component {
   }
 
   componentDidMount() {
-    let token = localStorage.getItem('TOKEN');
-    fetch(API_URLS.MYPAGE, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios
+      .get(API_URLS.MYPAGE)
       .then(res => {
         if (res.status === 200) {
           return res.json();
