@@ -21,10 +21,11 @@ export default class MainSection extends React.Component {
     if (movieListIndex === Math.ceil(movieInformationList.length / 5)) {
       return;
     }
+    console.log(this.containerWidth.current.offsetWidth);
     this.setState({
       movieListIndex: movieListIndex + 1,
       movieListContainerWidth:
-        this.containerWidth.current.scrollWidth * movieListIndex,
+        this.containerWidth.current.offsetWidth * movieListIndex,
     });
   };
 
@@ -37,14 +38,14 @@ export default class MainSection extends React.Component {
     this.setState({
       movieListIndex: movieListIndex - 1,
       movieListContainerWidth:
-        this.containerWidth.current.scrollWidth * (movieListIndex - 2),
+        this.containerWidth.current.offsetWidth * (movieListIndex - 2),
     });
   };
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({ isLoading: false });
-    }, 3000);
+    }, 1500);
   }
 
   render() {
