@@ -21,7 +21,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "HTTPS=true SSL_CRT_FILE=./example.com+5.pem SSL_KEY_FILE=./example.com+5-key.pem HOST=0.0.0.0 react-scripts start",
+    "start": "HTTPS=true SSL_CRT_FILE=./_wildcard.youngchapedia.com+1.pem SSL_KEY_FILE=./_wildcard.youngchapedia.com+1-key.pem HOST=0.0.0.0 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

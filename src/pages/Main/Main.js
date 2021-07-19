@@ -7,7 +7,7 @@ import API_URLS from 'config';
 import './Main.scss';
 
 const MOCK_DATA = axios.create({
-  baseURL: 'https://localhost:3000/',
+  baseURL: '',
 });
 
 class Main extends React.Component {
