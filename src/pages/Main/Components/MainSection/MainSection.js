@@ -21,7 +21,6 @@ export default class MainSection extends React.Component {
     if (movieListIndex === Math.ceil(movieInformationList.length / 5)) {
       return;
     }
-    console.log(this.containerWidth.current.offsetWidth);
     this.setState({
       movieListIndex: movieListIndex + 1,
       movieListContainerWidth:
