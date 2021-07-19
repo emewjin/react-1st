@@ -22,10 +22,10 @@ export default class StarRating extends Component {
     }
 
     if (starX < starWidth * 0.5) {
-      starRatingForPost = parseInt(nthstar) - 0.5;
       this.setState({
         rating: nthstar - 0.5,
       });
+      starRatingForPost = parseInt(nthstar) - 0.5;
     }
 
     return starRatingForPost;

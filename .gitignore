@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+_wildcard.youngchapedia.com+1-key.pem
+_wildcard.youngchapedia.com+1.pem
