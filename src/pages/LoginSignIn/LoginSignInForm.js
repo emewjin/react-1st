@@ -27,21 +27,29 @@ class LoginSignInForm extends Component {
       }),
     })
       .then(res => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        if (res.status === 400) {
-          alert('아이디는 nini@gmail.com 비밀번호는 12345678a@입니다');
+        switch (res.status) {
+          case 200:
+            return res.json();
+
+          case 400:
+            throw new Error('정보를 모두 입력해주세요');
+
+          case 401:
+            throw new Error('올바른 아이디 또는 비밀번호인지 확인해주세요');
+
+          default:
+            throw new Error('알 수 없는 에러가 발생했습니다');
         }
       })
       .then(res => {
-        if (res) {
-          localStorage.setItem('TOKEN', res.token);
-          this.props.checkUserLogined();
-          this.props.history.push('/review');
-        } else {
-          alert('로그인 하세요');
-        }
+        localStorage.setItem('TOKEN', res.token);
+        this.props.checkUserLogined();
+        alert('환영합니다');
+        this.props.history.push('/review');
+      })
+      .catch(error => {
+        console.log(error);
+        alert(error.message);
       });
   };
 
@@ -56,24 +64,19 @@ class LoginSignInForm extends Component {
       }),
     })
       .then(res => {
-        if (res.status === 200) {
+        if (res.status === 200 || res.status === 201) {
           return res.json();
+        } else {
+          throw new Error('회원가입에 실패했습니다. 다시 시도해주세요');
         }
       })
-      .then(
-        res => {
-          this.props.closeModal();
-          alert('회원가입 성공');
-        }
-        //   {
-        //   if (res) {
-        //     localStorage.setItem('TOKEN', res.token);
-        //     this.props.checkUserLogined();
-        //   }
-        // }
-      )
+      .then(() => {
+        this.props.closeModal();
+        alert('회원가입 성공');
+      })
       .catch(error => {
-        alert(error);
+        alert(error.message);
+        console.log(error);
       });
   };
 
