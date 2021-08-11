@@ -1,5 +1,8 @@
 # 🍿 Team Youngchapedia
 🚀 [https://youngchapedia.com/](https://youngchapedia.com/)
+🥲 현재 서버가 켜져 있지 않아 데이터를 표시할 수 없어요. 이용에 불편을 드려 죄송합니다.  
+📺 대신 [유튜브 데모 영상](https://www.youtube.com/watch?v=hDn8vX0VyUc)으로 확인해주세요!  
+
 
 ## 🎞 프로젝트 소개
 
@@ -13,7 +16,7 @@
  2. 기능 구현 계획별 시간 관리 경험 쌓기
  3. React Class Component를 사용한 컴포넌트 관리 및 구조 설계
  4. 라이브러리를 사용하지 않고 최대한 구현해보는 경험 쌓기
- 5. SSS를 활용한 스타일링
+ 5. SCSS를 활용한 스타일링
 
 ## 팀원 구성 및 블로그
 
@@ -27,10 +30,6 @@
 - 평가한 별점으로 사용자의 **선호 장르 파악** 별점 추이 **그래프화**
 - 장르별 영화 **필터링**
 - 시간이 지날수록 더 많아지는 영화들의 **정보** 관리
-
-## 데모 영상
-
-- YouTube : [Link](https://www.youtube.com/watch?v=hDn8vX0VyUc)
 
 ## 🎞 적용 기술 및 구현 기능
 
