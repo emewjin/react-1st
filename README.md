@@ -1,5 +1,5 @@
 # 🍿 Team Youngchapedia
-🚀 [https://youngchapedia.com/](https://youngchapedia.com/)
+🚀 [https://youngchapedia.com/](https://youngchapedia.com/)  
 🥲 현재 서버가 켜져 있지 않아 데이터를 표시할 수 없어요. 이용에 불편을 드려 죄송합니다.  
 📺 대신 [유튜브 데모 영상](https://www.youtube.com/watch?v=hDn8vX0VyUc)으로 확인해주세요!  
 
