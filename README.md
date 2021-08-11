@@ -35,7 +35,7 @@
 
 ### 적용 기술
 
-- Front-End : React, React Router, Sass, JavaScript, CRA
+- Front-End : React, React Router, Sass(SCSS), JavaScript, CRA
 - Back-End : Python, Django, My SQL
 - Communication Tool : Trello, Git, GitHub, Slack
 
